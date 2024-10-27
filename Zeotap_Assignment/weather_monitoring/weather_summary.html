@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Summary</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Weather Summary</h1>
+        
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>City</th>
+                    <th>Main Condition</th>
+                    <th>Temperature (°C)</th>
+                    <th>Feels Like (°C)</th>
+                    <th>Recorded At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for summary in summaries %}
+                    <tr>
+                        <td>{{ summary.city }}</td>
+                        <td>{{ summary.main_condition }}</td>
+                        <td>{{ summary.temp|floatformat:2 }}</td>
+                        <td>{{ summary.feels_like|floatformat:2 }}</td>
+                        <td>{{ summary.recorded_at }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center">No weather data available.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <a href="{% url 'weather_summary' %}" class="btn btn-primary">Refresh</a>
+    </div>
+</body>
+</html>
